@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AthliZen AI Chatbot</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-black text-white min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="flex items-center justify-between p-6 bg-white text-black shadow-lg">
+        <div class="text-3xl font-extrabold">
+            Athli<span class="font-normal">Zen</span>
+        </div>
+        <nav class="hidden md:flex space-x-8 text-lg">
+            <a href="index.html" class="hover:text-cyan-500 transition">Home</a>
+            <a href="programs.html" class="hover:text-cyan-500 transition">Programs</a>
+            <a href="subscription.html" class="hover:text-cyan-500 transition">Subscription</a>
+            <a href="chatbot.html" class="text-cyan-500 font-bold">AI Chat</a>
+        </nav>
+        <div class="flex space-x-4">
+            <a href="#" class="border border-cyan-500 text-cyan-500 px-4 py-2 rounded-lg hover:bg-cyan-50 hover:text-black transition">Get Started</a>
+            <a href="#" class="bg-cyan-500 text-white px-4 py-2 rounded-lg hover:bg-cyan-600 transition">Join Now</a>
+        </div>
+    </header>
+
+    <!-- Chatbot Section -->
+    <main class="flex-grow flex flex-col items-center justify-center p-4">
+        <h1 class="text-4xl md:text-5xl font-extrabold mb-6 text-center">AthliZen AI Fitness Chatbot</h1>
+        <p class="text-lg text-gray-400 mb-8 max-w-2xl text-center">
+            Ask me anything about fitness, workouts, injury prevention, recovery, and health. I’m here to help you on your journey!
+        </p>
+
+        <!-- Chat Window -->
+        <div class="bg-gray-900 w-full max-w-2xl h-[500px] rounded-lg p-4 flex flex-col">
+            <div id="chat-window" class="flex-grow overflow-y-auto mb-4 space-y-4 p-2 bg-black rounded text-white">
+                <!-- Chat messages will appear here -->
+            </div>
+
+            <!-- Input -->
+            <form id="chat-form" class="flex space-x-2">
+                <input type="text" id="user-input" placeholder="Ask your fitness question..." class="flex-grow px-4 py-2 rounded bg-gray-800 text-white focus:outline-none" required>
+                <button type="submit" class="bg-cyan-500 px-4 py-2 rounded hover:bg-cyan-600 transition">Send</button>
+            </form>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white text-black text-center p-4 mt-8">
+        © 2025 AthliZen. All Rights Reserved.
+    </footer>
+
+    <!-- Chatbot Logic -->
+    <script>
+        const form = document.getElementById('chat-form');
+        const chatWindow = document.getElementById('chat-window');
+        const userInput = document.getElementById('user-input');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const userMessage = userInput.value.trim();
+            if (userMessage === '') return;
+
+            appendMessage('You', userMessage);
+            userInput.value = '';
+
+            appendMessage('AthliZen AI', 'Typing...');
+
+            try {
+                const response = await fetch('http://localhost:5000/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: userMessage })
+                });
+
+                const data = await response.json();
+
+                // Remove 'Typing...' message
+                chatWindow.lastChild.remove();
+
+                appendMessage('AthliZen AI', data.reply);
+            } catch (error) {
+                chatWindow.lastChild.remove();
+                appendMessage('AthliZen AI', 'Error: Unable to get a response. Please try again later.');
+            }
+        });
+
+        function appendMessage(sender, message) {
+            const messageElement = document.createElement('div');
+            messageElement.innerHTML = `<strong>${sender}:</strong> ${message}`;
+            chatWindow.appendChild(messageElement);
+            chatWindow.scrollTop = chatWindow.scrollHeight;
+        }
+    </script>
+
+</body>
+
+</html>
