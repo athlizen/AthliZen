@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Athlizen</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+    html {
+    scroll-behavior: smooth;
+}
+</style>
+</head>
+
+
+<body class="bg-white text-black min-h-screen scroll-smooth">
+
+    <!-- Header -->
+    <header class="flex items-center justify-between p-4 shadow-md bg-white text-black">
+        <!-- Logo -->
+        <div class="text-2xl font-bold">
+            Athli<span class="font-normal">Zen</span>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="flex space-x-8 text-lg">
+            <a href="AthliZen.html#programs" class="hover:text-blue-500">Programs</a>
+            <a href="AthliZen.html#about us" class="hover:text-blue-500" >About Us</a>
+         
+        </nav>
+
+        <!-- Buttons -->
+        <div class="flex space-x-4">
+            <a href="https://your-get-started-link.com"
+                class="border border-blue-500 text-blue-500 px-4 py-2 rounded hover:bg-blue-50 hover:text-black">
+                Get Started
+            </a>
+            <a href="https://your-join-now-link.com"
+                class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                Join Now
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative w-full h-[90vh] flex items-center justify-center text-white bg-cover bg-center bg-no-repeat"
+    style="background-image: url('best-injury-prevention-exercises-banner-image-1.jpg');">
+    
+    <!-- Overlay -->
+    <div class="absolute inset-0 bg-black bg-opacity-50 z-10"></div>
+
+    <!-- Text Content -->
+    <div class="relative z-20 text-center max-w-3xl px-4">
+        <h1 class="text-4xl md:text-6xl font-extrabold mb-6 leading-tight">
+            Prevent Injuries,<br>
+            <span class="italic font-semibold">Accelerate</span> Recovery
+        </h1>
+        <p class="text-lg md:text-xl mb-8">
+            AthliZen’s Injury Prevention and Recovery Program is designed to keep you in the game. We offer
+            personalized strategies to minimize injury risk and optimize recovery, ensuring you stay healthy and
+            perform at your best. Our evidence-based approach supports long-term athletic resilience.
+        </p>
+        <div class="flex justify-center space-x-4">
+            <a href="#learn" class="bg-white text-black px-6 py-3 rounded hover:bg-gray-200"  onclick="scrollToSection(event, 'learn')">Learn More</a>
+            <a href="#" class="border border-white px-6 py-3 rounded hover:bg-white hover:text-black">Get Started</a>
+        </div>
+    </div>
+</section>
+
+<!-- Why Choose Us Section -->
+<section class="flex flex-col lg:flex-row bg-white text-black py-16 px-8 lg:px-20 overflow-hidden">
+
+    <!-- Text Content -->
+    <div id="learn" class="lg:w-1/2 flex flex-col justify-center mb-12 lg:mb-0">
+        <h2 class="text-3xl lg:text-5xl font-extrabold mb-6 leading-tight">
+            Why Choose Our Injury <br> Prevention & Recovery Program
+        </h2>
+        <p class="text-lg mb-8">
+            At AthleteThrive, our Injury Prevention and Recovery Program is designed to keep athletes healthy,
+            resilient, and performing at their best. Our personalized approach includes injury assessments, targeted
+            exercises, and expert rehabilitation support to help you recover faster and prevent future injuries. Join us
+            to experience a comprehensive program tailored to your athletic needs.
+        </p>
+
+        <!-- Stats -->
+        <div class="grid grid-cols-2 gap-8 text-center">
+            <div>
+                <p class="text-3xl font-bold">150 sessions</p>
+                <p class="text-gray-600">Total sessions completed</p>
+            </div>
+            <div>
+                <p class="text-3xl font-bold">300 sessions</p>
+                <p class="text-gray-600">Sessions planned for the upcoming months</p>
+            </div>
+            <div>
+                <p class="text-3xl font-bold">50 athletes</p>
+                <p class="text-gray-600">Number of athletes served</p>
+            </div>
+            <div>
+                <p class="text-3xl font-bold">200 athletes</p>
+                <p class="text-gray-600">Athletes who have benefited</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Image -->
+    <div class="lg:w-1/2 flex justify-center">
+        <!-- Replace with your image -->
+        <img src="tenweb_media_soxsriwse.webp" alt="Injury Prevention Room" class="rounded-lg w-full h-full object-cover max-w-lg">
+    </div>
+
+</section>
+
+</body>
+
+</html>
+<script>
+    function scrollToSection(event, sectionId) {
+        event.preventDefault();
+        document.getElementById(sectionId).scrollIntoView({
+            behavior: 'smooth'
+        });
+    }
+</script>

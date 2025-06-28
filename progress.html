@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Athlizen</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+    html {
+    scroll-behavior: smooth;
+}
+</style>
+</head>
+
+
+<body class="bg-white text-black min-h-screen scroll-smooth">
+
+    <!-- Header -->
+    <header class="flex items-center justify-between p-4 shadow-md bg-white text-black">
+        <!-- Logo -->
+        <div class="text-2xl font-bold">
+            Athli<span class="font-normal">Zen</span>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="flex space-x-8 text-lg">
+            <a href="AthliZen.html#programs" class="hover:text-blue-500">Programs</a>
+            <a href="AthliZen.html#about us" class="hover:text-blue-500" >About Us</a>
+         
+        </nav>
+
+        <!-- Buttons -->
+        <div class="flex space-x-4">
+            <a href="https://your-get-started-link.com"
+                class="border border-blue-500 text-blue-500 px-4 py-2 rounded hover:bg-blue-50 hover:text-black">
+                Get Started
+            </a>
+            <a href="https://your-join-now-link.com"
+                class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                Join Now
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative w-full h-[90vh] flex items-center justify-center text-white bg-cover bg-center bg-no-repeat"
+    style="background-image: url('1718313312880.png');">
+    
+    <!-- Overlay -->
+    <div class="absolute inset-0 bg-black bg-opacity-50 z-10"></div>
+
+    <!-- Text Content -->
+    <div class="relative z-20 text-center max-w-3xl px-4">
+        <h1 class="text-4xl md:text-6xl font-extrabold mb-6 leading-tight">
+            Unlock Your<br>
+            <span class="italic font-semibold">Peak</span> Athletic Potential
+        </h1>
+        <p class="text-lg md:text-xl mb-8">
+            Our Performance Enhancement Program at AthleteThrive is designed to elevate your athletic capabilities. We focus on improving your strength, speed, and endurance through personalized training routines and expert coaching. Join us to maximize your results and achieve your athletic goals.
+        </p>
+        <div class="flex justify-center space-x-4">
+            <a href="#learn" class="bg-white text-black px-6 py-3 rounded hover:bg-gray-200"  onclick="scrollToSection(event, 'learn')">Learn More</a>
+            <a href="#" class="border border-white px-6 py-3 rounded hover:bg-white hover:text-black">Get Started</a>
+        </div>
+    </div>
+</section>
+
+<!-- Why Choose Us Section -->
+<section class="flex flex-col lg:flex-row bg-white text-black py-16 px-8 lg:px-20 overflow-hidden">
+
+    <!-- Text Content -->
+    <div id="learn" class="lg:w-1/2 flex flex-col justify-center mb-12 lg:mb-0">
+        <h2 class="text-3xl lg:text-5xl font-extrabold mb-6 leading-tight">
+            Why Choose Our <br> Performance Boost?
+        </h2>
+        <p class="text-lg mb-8">
+            Discover how AthliZen’s Performance Enhancement Program can transform your athletic capabilities. Our tailored routines, expert coaching, and advanced analytics are designed to help you reach new heights. Whether you’re a beginner or an elite athlete, our program offers personalized support to maximize your results and keep you motivated on your journey to excellence.
+        </p>
+
+        <!-- Stats -->
+        
+    </div>
+
+    <!-- Image -->
+    <div class="lg:w-1/2 flex justify-center">
+        <!-- Replace with your image -->
+        <img src="per.webp" alt="Injury Prevention Room" class="rounded-lg w-full h-full object-cover max-w-lg">
+    </div>
+
+</section>
+
+</body>
+
+</html>
+<script>
+    function scrollToSection(event, sectionId) {
+        event.preventDefault();
+        document.getElementById(sectionId).scrollIntoView({
+            behavior: 'smooth'
+        });
+    }
+</script>
