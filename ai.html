@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <link rel="icon" type="image/png" href="athilzen logo.png">
+  <title>Your Personal AI Advisor</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: #0b0e17;
+      color: #ffffff;
+      background-image: url("https://www.transparenttextures.com/patterns/asfalt-dark.png");
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 2rem;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      background: linear-gradient(90deg, #fca5a5, #c084fc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      text-align: center;
+      color: #cbd5e1;
+      margin-bottom: 2rem;
+      max-width: 500px;
+    }
+
+    #header-form {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+    }
+
+    #header-form input {
+      padding: 0.75rem 1rem;
+      border-radius: 12px;
+      border: none;
+      background-color: #1e293b;
+      color: #fff;
+      font-size: 0.95rem;
+    }
+
+    #header-form button {
+      background-color: #f9a8d4;
+      border: none;
+      padding: 0.75rem 1rem;
+      border-radius: 12px;
+      font-weight: bold;
+      color: #1e1b24;
+      cursor: pointer;
+    }
+
+    #chat-container {
+      background-color: #131a28;
+      border-radius: 20px;
+      padding: 2rem;
+      width: 100%;
+      max-width: 600px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    #chatbox {
+      height: 350px;
+      overflow-y: auto;
+      padding: 1rem;
+      background: #1c2433;
+      border-radius: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .message {
+      max-width: 70%;
+      padding: 0.75rem 1rem;
+      border-radius: 15px;
+      font-size: 0.95rem;
+      line-height: 1.4;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+
+    .avatar {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background-color: #f472b6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      color: white;
+      flex-shrink: 0;
+      font-size: 0.85rem;
+    }
+
+    .user {
+      align-self: flex-end;
+      background-color: #334155;
+      color: #fff;
+      flex-direction: row-reverse;
+    }
+
+    .ai {
+      align-self: flex-start;
+      background-color: #3f3f46;
+      color: #f1f5f9;
+    }
+
+    form {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
+    input[type="text"] {
+      flex-grow: 1;
+      padding: 0.9rem 1rem;
+      border: none;
+      border-radius: 14px;
+      font-size: 1rem;
+      background-color: #1f2937;
+      color: white;
+    }
+
+    button {
+      background-color: #f9a8d4;
+      color: #1e1b24;
+      border: none;
+      padding: 0 1.2rem;
+      border-radius: 14px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #f472b6;
+    }
+  </style>
+</head>
+<body>
+  <h1>Your Personal <span style="color:#f472b6;">AI Advisor</span></h1>
+  <p>These are just a few of the many features AthliZen has to offer. Ask anything related to fitness, health, or your personal journey.</p>
+  <form id="header-form">
+    <input type="email" placeholder="Enter your email" />
+    <button type="button">Join Beta</button>
+  </form>
+
+  <div id="chat-container">
+    <div id="chatbox"></div>
+    <form id="chat-form">
+      <input type="text" id="user-input" placeholder="Write a message..." required />
+      <button type="submit">Send ➤</button>
+    </form>
+  </div>
+
+  <script>
+    const chatbox = document.getElementById("chatbox");
+    const form = document.getElementById("chat-form");
+    const input = document.getElementById("user-input");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const message = input.value.trim();
+      if (!message) return;
+
+      appendMessage("user", message);
+      input.value = "";
+
+      appendMessage("ai", "Typing...");
+      try {
+        const response = await fetch("http://localhost:5000/ask", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ question: message })
+        });
+
+        const data = await response.json();
+        document.querySelector(".ai:last-child").remove();
+        appendMessage("ai", data.answer || "Sorry, I didn't understand that.");
+      } catch (err) {
+        document.querySelector(".ai:last-child").remove();
+        appendMessage("ai", "Error: Couldn't connect to server.");
+      }
+    });
+
+    function appendMessage(role, text) {
+      const messageEl = document.createElement("div");
+      messageEl.classList.add("message", role);
+
+      const avatar = document.createElement("div");
+      avatar.classList.add("avatar");
+      avatar.textContent = role === "user" ? "U" : "A";
+
+      const textEl = document.createElement("div");
+      textEl.textContent = text;
+
+      messageEl.appendChild(avatar);
+      messageEl.appendChild(textEl);
+      chatbox.appendChild(messageEl);
+      chatbox.scrollTop = chatbox.scrollHeight;
+    }
+  </script>
+</body>
+</html>
