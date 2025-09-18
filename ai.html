@@ -191,7 +191,7 @@
 
       appendMessage("ai", "Typing...");
       try {
-        const response = await fetch("http://localhost:5000/ask", {
+        const response = await fetch("https://athlizen-1.onrender.com/ask", {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
@@ -226,4 +226,5 @@
     }
   </script>
 </body>
+
 </html>
